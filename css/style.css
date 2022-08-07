@@ -23,7 +23,12 @@ body{
 }
 
 .logo-img{
-    
+
+
+
+    /* temporary !! */
+    height: 500px;
+    width: 500px;
 }
 
 .logo-text{
@@ -46,7 +51,7 @@ body{
 
 }
 
-.signup-form{
+#signup-form{
 
 }
 
@@ -62,8 +67,58 @@ body{
     
 }
 
+#password{
+
+}
+
+#password-repeat{
+
+}
+
+/* the message bos is shown when the user clicks on the password field */
+#password-syntax-message{
+    display: none;
+    background: gray;
+    color: black;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#password-syntax-message{
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+.password-valid{
+    color: green;
+}
+
+.password-valid:before{
+    position: relative;
+    left: -35px;
+    content: "&#10004;";
+}
+
+.password-invalid{
+    color: red;
+    background-color: lightcoral;
+}
+
+.password-invalid:before{
+    position: relative;
+    left: -35px;
+    content: "&#10006;";
+}
+
 .form-submit{
     
+}
+
+#btn-submit{
+    background-color: darkcyan;
+    color: white;
+    font-size: 24px;
 }
 
 .form-footer{

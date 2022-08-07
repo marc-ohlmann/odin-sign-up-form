@@ -50,7 +50,7 @@
         <!--
             link to external js script
         -->
-        <script src="sign-up.js" defer></script>
+        <script src="./js/sign-up.js" defer></script>
 
     </head>
 
@@ -87,7 +87,7 @@
                     </p>
                 </div>
 
-                <form class="signup-form" action="http://httpbin.org/post" method="post">
+                <form id="signup-form" action="http://httpbin.org/post" method="post">
                     <div class="form-title-text">Let's do this!</div>
 
                     <div class="form-username">
@@ -103,12 +103,22 @@
 
                     <div class="form-password">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="*****" required>
-                        <input type="password" id="password-repeat" name="password-repeat" placeholder="*****" required>
+                        <input type="password" id="password" name="password" placeholder="*****" 
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and 
+                            one uppercase and lowercase letter, and at least 8 or more characters" required>
+                        <input type="password" id="password-repeat" title="Must match exactly" placeholder="*****" required>
+                    </div>
+
+                    <div id="password-syntax-message">
+                        <h3>Password must contain the following:</h3>
+                        <p id="password-syntax-letter" class="password-invalid">A <b>lowercase</b> letter</p>
+                        <p id="password-syntax-capital" class="password-invalid">A <b>uppercase</b> letter</p>
+                        <p id="password-syntax-number" class="password-invalid">A <b>number</b></p>
+                        <p id="password-syntax-length" class="password-invalid">A minimum of <b>8 characters</b></p>
                     </div>
 
                     <div class="form-submit">
-                        <button type="submit">Create Account</button>
+                        <button type="submit" id="btn-submit">Create Account</button>
                     </div>
 
                     <div class="form-footer">
