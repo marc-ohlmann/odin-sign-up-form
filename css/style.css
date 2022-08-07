@@ -1,0 +1,71 @@
+body{
+
+    background-color: lightsalmon;
+}
+
+.horizontal-dividor{
+    display: flex;
+    flex-direction: row;
+}
+
+/* cosmetics left-hand side */
+
+.cosmetic-container{
+    flex: 1;
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.logo-container{
+    
+}
+
+.logo-img{
+    
+}
+
+.logo-text{
+    
+}
+
+.cosmetic-footer{
+    flex: 1;
+    
+}
+
+/* form right-hand side */
+
+.form-container{
+    flex: 2;
+    align-items: flex-start;
+}
+
+.form-description-text{
+
+}
+
+.signup-form{
+
+}
+
+.form-username{
+
+}
+
+.form-email{
+
+}
+
+.form-password{
+    
+}
+
+.form-submit{
+    
+}
+
+.form-footer{
+    
+}
