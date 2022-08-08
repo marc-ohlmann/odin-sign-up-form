@@ -362,6 +362,7 @@ function IsPasswordValid(string)
     return  DoesContainLowerCaseLetter(string) &&
             DoesContainUpperCaseLetter(string) &&
             DoesContainNumber(string) &&
+            DoesContainSpecialCharacter(string) &&
             IsMinimumLength(string);
 }
 
