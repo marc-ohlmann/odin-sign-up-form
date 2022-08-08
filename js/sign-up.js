@@ -22,11 +22,11 @@ const PasswordSyntaxNumberElement = document.querySelector("#password-syntax-num
 const PasswordSyntaxLengthElement = document.querySelector("#password-syntax-length");
 const BtnSubmit = document.querySelector("#btn-submit");
 
-PasswordElement.setAttribute('title', "Must contain at least one number, one uppercase letter, one lowercase, and at least "
+PasswordElement.setAttribute('title', "Must contain at least one number, one special character, one uppercase letter, one lowercase, and at least "
     + String(c_PasswordMinLength) + " or more characters");
 PasswordElement.setAttribute('pattern', "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{" + String(c_PasswordMinLength) + ",}");
 PasswordSyntaxLengthElement.innerHTML = "A minimum of <b>" + String(c_PasswordMinLength) + " characters</b>"
-PasswordSyntaxSpecialElement.innerHTML = "A special (<b>" + c_SpecialCharacters + "</b>) character"
+PasswordSyntaxSpecialElement.innerHTML = "A special character (<b>" + c_SpecialCharacters + "</b>)"
 
 // events
 FormElement.onsubmit = OnFormSubmitRequested;
