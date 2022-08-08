@@ -76,7 +76,8 @@
 
             <div id="form-container">
 
-                <div id="form-description-text">
+
+                <div id="form-description">
                     <p>
                         This is not a real online service! You know you need
                         something like this in your life.
@@ -86,49 +87,62 @@
                     </p>
                 </div>
 
-                <form id="signup-form" action="http://httpbin.org/post" method="post">
-                    <div class="form-title-text">Let's do this!</div>
 
-                    <div id="form-username">
-                        <label for="name-first">Name</label>
-                        <input type="text" id="name-first" name="name-first" placeholder="First" required>
-                        <input type="text" id="name-last" name="name-last" placeholder="Last" required>
-                    </div>
+                <form action="http://httpbin.org/post" method="post">
+                    <div id="signup-form">
 
-                    <div id="form-phone-number">
-                        <label for="phone-number">Phone</label>
-                        <input type="text" id="phone-number" name="phone-number" placeholder="(xxx) xxx-xxxx" required>
-                    </div>
+                        
+                        <div id="form-title">Let's do this!</div>
 
-                    <div id="form-email">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
-                    </div>
 
-                    <div id="form-password">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="*****" required>
-                        <input type="password" id="password-repeat" name="password-repeat" title="Must match password exactly" placeholder="*****" required>
-                    </div>
+                        <div id="form-username" class="form-input">
+                            <label for="name-first">Name</label>
+                            <input type="text" id="name-first" name="name-first" placeholder="First" required>
+                            <input type="text" id="name-last" name="name-last" placeholder="Last" required>
+                        </div>
 
-                    <div id="password-syntax-message">
-                        <h3>Password must contain the following:</h3>
-                        <p id="password-syntax-letter" class="form-invalid">A <b>lowercase</b> letter</p>
-                        <p id="password-syntax-capital" class="form-invalid">A <b>uppercase</b> letter</p>
-                        <p id="password-syntax-special" class="form-invalid">A special character</p>
-                        <p id="password-syntax-number" class="form-invalid">A <b>number</b></p>
-                        <p id="password-syntax-length" class="form-invalid">A minimum of <b>8 characters</b></p>
-                    </div>
 
-                    <div id="form-submit">
-                        <button type="submit" id="btn-submit">Create Account</button>
-                    </div>
+                        <div id="form-phone-number" class="form-input">
+                            <label for="phone-number">Phone</label>
+                            <input type="text" id="phone-number" name="phone-number" placeholder="(xxx) xxx-xxxx" required>
+                        </div>
 
-                    <div id="form-footer">
-                        Already have an account? <a href="login">Log in</a>
+
+                        <div id="form-email" class="form-input">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                        </div>
+
+
+                        <div id="form-password" class="form-input">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="*****" required>
+                            <input type="password" id="password-repeat" name="password-repeat" title="Must match password exactly" placeholder="*****" required>
+                        </div>
+
+
+                        <div id="password-syntax-message" class="form-input">
+                            <h3>Password must contain the following:</h3>
+                            <p id="password-syntax-letter" class="form-invalid">A <b>lowercase</b> letter</p>
+                            <p id="password-syntax-capital" class="form-invalid">A <b>uppercase</b> letter</p>
+                            <p id="password-syntax-special" class="form-invalid">A special character</p>
+                            <p id="password-syntax-number" class="form-invalid">A <b>number</b></p>
+                            <p id="password-syntax-length" class="form-invalid">A minimum of <b>8 characters</b></p>
+                        </div>
+
+
+                        <div id="form-submit" class="form-input">
+                            <button type="submit" id="btn-submit">Create Account</button>
+                        </div>
+
+
+                        <div id="form-footer">
+                            Already have an account? <a href="login">Log in</a>
+                        </div>
+                
+
                     </div>
-                    
-                </div>
+                </form>
 
             </div>
 

@@ -1,6 +1,9 @@
 :root{
-    --primary-color: orange;
-    --text-color: blue;
+    --dark-color: rgb(224, 135, 0);
+    --bright-color: rgb(0, 189, 196);
+    --error-color: red;
+    --valid-color: green;
+    --focus-color: yellow
 }
 
 *{
@@ -10,21 +13,19 @@
     box-sizing: border-box;
 }
 
-body{
-
-    background-color: lightsalmon;
-}
-
-h1, h2, h3, h4, h5, h6{
+p, h1, h2, h3, h4, h5, h6{
     color: white;
 }
 
 input{
     border-radius: 6px;
+    padding: 2px;
+    margin: 2px;
+    font-size: 1.0rem;
 }
 
 .horizontal-dividor{
-    background-color: gray;
+    background-color: black;
     display: flex;
     flex-flow: row wrap;
     width: 100vw;
@@ -68,11 +69,62 @@ input{
 
 #form-container{
     width: 60vw;
-    background-color: lightgreen;
+    background-color: var(--dark-color);
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
 }
+
+#form-description{
+    font-weight: 500;
+    width: 90%;
+    font-size: 1.2rem;
+    padding-left: 3vw;
+}
+
+#form-description p{
+    margin: 40px 0 80px;
+}
+
+#form-title{
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#signup-form{
+    background-color: var(--bright-color);
+    box-shadow: 0 10px 20px -2px rgb(22, 22, 22);
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 3vw;
+}
+
+#form-footer{
+    padding-left: 3vw;
+}
+
+#form-footer a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+#form-footer a:hover{
+    color: white;
+}
+
+.form-input{
+    display: flex;
+    flex-flow: column wrap;
+    width: 40%;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
 
 /* the message bos is shown when the user clicks on the password field */
 #password-syntax-message{
@@ -82,6 +134,7 @@ input{
     position: relative;
     padding: 20px;
     margin-top: 10px;
+    width: 480px;
 }
 
 #password-syntax-message{
@@ -90,7 +143,7 @@ input{
 }
 
 .form-valid{
-    color: green;
+    color: var(--valid-color);
 }
 
 .form-valid:before{
@@ -99,7 +152,7 @@ input{
 }
 
 .form-invalid{
-    color: red;
+    color: var(--error-color);
 }
 
 .form-invalid:before{
@@ -114,20 +167,29 @@ input{
 #password.form-invalid, 
 #password-repeat.form-invalid,
 #phone-number.form-invalid{
-    border-color: red;
+    border-color: var(--error-color);
     border-width: 4px;
 }
 
 #btn-submit{
-    background-color: darkcyan;
-    color: white;
-    font-size: 24px;
+    background-color: var(--dark-color);
+    color: black;
     border-radius: 6px;
-    box-shadow: 1px 1px 1px darkblue;
+    box-shadow: 1px 1px 1px var(--dark-color);
+    font-weight: 700;
+    font-size: 1.2em;
+    border: 2px solid var(--focus-color);
+    padding: 10px 40px;
+    margin: 40px 0;
+}
+
+#btn-submit:hover{
+    background-color: var(--dark-color);
+    color: white;
 }
 
 input:focus{
-    border: 4px solid blue;
-    box-shadow: 3px 3px 3px darkblue;
+    border: 4px solid var(--focus-color);
+    box-shadow: 3px 3px 3px var(--dark-color);
     border-radius: 0;
 }
