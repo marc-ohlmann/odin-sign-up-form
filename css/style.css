@@ -1,74 +1,75 @@
+:root{
+    --primary-color: orange;
+    --text-color: blue;
+}
+
+*{
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
 body{
 
     background-color: lightsalmon;
 }
 
+h1, h2, h3, h4, h5, h6{
+    color: white;
+}
+
+input{
+    border-radius: 6px;
+}
+
 .horizontal-dividor{
+    background-color: gray;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
 }
 
 /* cosmetics left-hand side */
 
-#cosmetic-container{
-    flex: 1;
-    display: grid;
-    justify-content: space-between;
-    align-items: center;
-
+#picture{
+    background-image: url(../img/IMG_0355.JPG);
+    background-position: center;
+    background-size: 1024px;
+    background-repeat: no-repeat;
+    width: 40vw;
 }
 
-#logo-container{
-    
+#logo{
+    display: flex;
+    flex-flow: row wrap;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    top: 20vh;
+    gap: 1vw;
+    padding: 15px 0;
+
+    justify-content: center;
+    align-items: center;
 }
 
 #logo-img{
-    height: 400px;
-    width: auto;
-}
-
-#logo-text{
-    
+    height: 10vh;
 }
 
 #cosmetic-footer{
     flex: 1;
-    
+    text-align: center;
 }
 
 /* form right-hand side */
 
 #form-container{
-    flex: 2;
+    flex: 3;
     align-items: flex-start;
-}
-
-#form-description-text{
-
-}
-
-#signup-form{
-
-}
-
-#form-username{
-
-}
-
-#form-email{
-
-}
-
-#form-password{
-    
-}
-
-#password{
-
-}
-
-#password-repeat{
-
+    background-color: lightgreen;
+    margin: 24px;
+    padding: 12px;
 }
 
 /* the message bos is shown when the user clicks on the password field */
@@ -84,7 +85,6 @@ body{
 #password-syntax-message{
     padding: 10px 35px;
     font-size: 16px;
-    font-family: 'Courier New', Courier, monospace;
 }
 
 .form-valid{
@@ -124,20 +124,8 @@ body{
     box-shadow: 1px 1px 1px darkblue;
 }
 
-input{
-    border-radius: 6px;
-}
-
 input:focus{
     border: 4px solid blue;
     box-shadow: 3px 3px 3px darkblue;
     border-radius: 0;
-}
-
-#form-footer{
-    
-}
-
-#form-submit{
-    
 }
