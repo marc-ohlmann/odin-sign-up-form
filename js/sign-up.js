@@ -25,11 +25,13 @@ PasswordRepeatElement.onblur = OnPasswordRepeatBlur;
 PasswordRepeatElement.onkeyup = OnPasswordRepeatKeyUp;
 BtnSubmit.onclick = OnSubmitButtonClicked;
 
-// hwen the user clicks inside of the password field
+
+// when the user clicks inside of the password field
 function OnPasswordFocused(event)
 {
     PasswordSyntaxElement.style.display = "block";
 }
+
 
 // when the user clicks outside of the password field
 function OnPasswordBlur(event)
@@ -39,12 +41,12 @@ function OnPasswordBlur(event)
     CheckPasswordsMatch();
 }
 
+
 // when the user starts to type something inside the password field
 function OnPasswordKeyUp(event)
 {
     // validate lowercase
-    var lowerCaseLetters = /[a-z]/g;
-    if(PasswordElement.value.match(lowerCaseLetters))
+    if(DoesContainLowerCaseLetter(PasswordElement.value))
     {
         PasswordSyntaxLetterElement.classList.remove("password-invalid");
         PasswordSyntaxLetterElement.classList.add("password-valid");
@@ -55,9 +57,8 @@ function OnPasswordKeyUp(event)
         PasswordSyntaxLetterElement.classList.add("password-invalid");
     }
 
-    // validate lowercase
-    var upperCaseLetters = /[A-Z]/g;
-    if(PasswordElement.value.match(upperCaseLetters))
+    // validate uppercase
+    if(DoesContainUpperCaseLetter(PasswordElement.value))
     {
         PasswordSyntaxCapitalElement.classList.remove("password-invalid");
         PasswordSyntaxCapitalElement.classList.add("password-valid");
@@ -69,8 +70,7 @@ function OnPasswordKeyUp(event)
     }
 
     // validate numbers
-    var numbers = /[0-9]/g;
-    if(PasswordElement.value.match(numbers))
+    if(DoesContainNumber(PasswordElement.value))
     {
         PasswordSyntaxNumberElement.classList.remove("password-invalid");
         PasswordSyntaxNumberElement.classList.add("password-valid");
@@ -82,7 +82,7 @@ function OnPasswordKeyUp(event)
     }
 
     // validate length
-    if(PasswordElement.value.length >= c_PasswordMinLength)
+    if(IsMinimumLength(PasswordElement.value))
     {
         PasswordSyntaxLengthElement.classList.remove("password-invalid");
         PasswordSyntaxLengthElement.classList.add("password-valid");
@@ -140,4 +140,58 @@ function CheckPasswordsMatch()
 function DoPasswordFieldsMatch()
 {
     return PasswordElement.value === PasswordRepeatElement.value
+}
+
+
+function DoesContainLowerCaseLetter(string)
+{
+    const lowerCaseLetters = /[a-z]/g;
+    if(string.match(lowerCaseLetters))
+    {
+        return true;
+    }
+    
+
+    return false;
+}
+
+
+function DoesContainUpperCaseLetter(string)
+{
+    const upperCaseLetters = /[A-Z]/g;
+    if(string.match(upperCaseLetters))
+    {
+        return true;
+    }
+    
+
+    return false;
+}
+
+
+function DoesContainNumber(string)
+{
+    const numbers = /[0-9]/g;
+    if(string.match(numbers))
+    {
+        return true;
+    }
+    
+
+    return false;
+}
+
+
+function IsMinimumLength(string)
+{
+    return string.length >= c_PasswordMinLength;
+}
+
+
+function IsPasswordValid(string)
+{
+    return  DoesContainLowerCaseLetter(string) &&
+            DoesContainUpperCaseLetter(string) &&
+            DoesContainNumber(string) &&
+            IsMinimumLength(string);
 }

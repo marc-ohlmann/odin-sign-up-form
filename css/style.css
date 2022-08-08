@@ -78,7 +78,7 @@ body{
 /* the message bos is shown when the user clicks on the password field */
 #password-syntax-message{
     display: none;
-    background: gray;
+    background: lightgray;
     color: black;
     position: relative;
     padding: 20px;
@@ -87,7 +87,8 @@ body{
 
 #password-syntax-message{
     padding: 10px 35px;
-    font-size: 18px;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .password-valid{
@@ -97,18 +98,20 @@ body{
 .password-valid:before{
     position: relative;
     left: -35px;
-    content: "&#10004;";
 }
 
 .password-invalid{
     color: red;
-    background-color: lightcoral;
+}
+
+#password-repeat.password-invalid{
+    border-color: red;
+    border-width: 4px;
 }
 
 .password-invalid:before{
     position: relative;
     left: -35px;
-    content: "&#10006;";
 }
 
 .form-submit{
