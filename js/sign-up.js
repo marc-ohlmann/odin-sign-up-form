@@ -4,22 +4,35 @@
 const c_PasswordMinLength = 8;
 const c_FormElementClass_Valid = "form-valid";
 const c_FormElementClass_Invalid = "form-invalid";
+const c_SpecialCharacters = "!@#$%^&*";
 
 // elements
 const FormElement = document.querySelector("#signup-form");
+const NameElement_First = document.querySelector("#name-first");
+const NameElement_Last = document.querySelector("#name-last");
+const EmailElement = document.querySelector("#email");
 const PhoneNumberElement = document.querySelector("#phone-number");
 const PasswordElement = document.querySelector("#password");
 const PasswordRepeatElement = document.querySelector("#password-repeat");
 const PasswordSyntaxElement = document.querySelector("#password-syntax-message");
 const PasswordSyntaxLetterElement = document.querySelector("#password-syntax-letter");
 const PasswordSyntaxCapitalElement = document.querySelector("#password-syntax-capital");
+const PasswordSyntaxSpecialElement = document.querySelector("#password-syntax-special");
 const PasswordSyntaxNumberElement = document.querySelector("#password-syntax-number");
 const PasswordSyntaxLengthElement = document.querySelector("#password-syntax-length");
 const BtnSubmit = document.querySelector("#btn-submit");
 
+PasswordElement.setAttribute('title', "Must contain at least one number, one uppercase letter, one lowercase, and at least "
+    + String(c_PasswordMinLength) + " or more characters");
+PasswordElement.setAttribute('pattern', "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{" + String(c_PasswordMinLength) + ",}");
+PasswordSyntaxLengthElement.innerHTML = "A minimum of <b>" + String(c_PasswordMinLength) + " characters</b>"
+PasswordSyntaxSpecialElement.innerHTML = "A special (<b>" + c_SpecialCharacters + "</b>) character"
 
 // events
 FormElement.onsubmit = OnFormSubmitRequested;
+NameElement_First.onblur = OnFirstNameBlur;
+NameElement_Last.onblur = OnLastNameBlur;
+EmailElement.onblur = OnEmailBlur;
 PasswordElement.onfocus = OnPasswordFocused;
 PasswordElement.onblur = OnPasswordBlur;
 PasswordElement.onkeyup = OnPasswordKeyUp;
@@ -27,6 +40,33 @@ PasswordRepeatElement.onblur = OnPasswordRepeatBlur;
 PasswordRepeatElement.onkeyup = OnPasswordRepeatKeyUp;
 PhoneNumberElement.onblur = OnPhoneNumberBlur;
 BtnSubmit.onclick = OnSubmitButtonClicked;
+
+
+// when the user clicks outside of the first name field
+function OnFirstNameBlur(event)
+{
+    if(NameElement_First.classList.contains(c_FormElementClass_Invalid))
+    {
+        CheckFirstNameValid();
+    }
+}
+
+
+// when the user clicks outside of the last name field
+function OnLastNameBlur(event)
+{
+    if(NameElement_Last.classList.contains(c_FormElementClass_Invalid))
+    {
+        CheckLastNameValid();
+    }
+}
+
+
+// when the user clicks outside of the email field
+function OnEmailBlur(event)
+{
+    CheckEmailValid();
+}
 
 
 // when the user clicks inside of the password field
@@ -42,12 +82,117 @@ function OnPasswordBlur(event)
     PasswordSyntaxElement.style.display = "none";
 
     CheckPasswordsMatch();
+    CheckPasswordValid();
 }
 
 
 // when the user starts to type something inside the password field
 function OnPasswordKeyUp(event)
 {
+    CheckPasswordValid();
+}
+
+// when the user clicks outside of the repeat-password field
+function OnPasswordRepeatBlur(event)
+{
+    CheckPasswordsMatch();
+}
+
+// when the user types in the repeat-password field
+function OnPasswordRepeatKeyUp(event)
+{
+    CheckPasswordsMatch();
+}
+
+
+// called when the submit button is pressed
+function OnSubmitButtonClicked()
+{
+    CheckFirstNameValid();
+    CheckLastNameValid();
+    CheckEmailValid();
+    CheckPhoneNumberValid();
+    CheckPasswordValid();
+    CheckPasswordsMatch();
+}
+
+
+// called when the form is submitted
+// returns true if the page form should be submitted
+function OnFormSubmitRequested()
+{
+    return DoPasswordFieldsMatch();
+}
+
+
+// when the user clicks outside of the phone-number field
+function OnPhoneNumberBlur(event)
+{
+    CheckPhoneNumberValid();
+}
+
+
+function CheckFirstNameValid()
+{
+    if(IsNameValid(NameElement_First.value))
+    {
+        NameElement_First.classList.remove(c_FormElementClass_Invalid);
+        NameElement_First.classList.add(c_FormElementClass_Valid);
+    }
+    else
+    {
+        NameElement_First.classList.remove(c_FormElementClass_Valid);
+        NameElement_First.classList.add(c_FormElementClass_Invalid);
+    }
+}
+
+
+function CheckLastNameValid()
+{
+    if(IsNameValid(NameElement_Last.value))
+    {
+        NameElement_Last.classList.remove(c_FormElementClass_Invalid);
+        NameElement_Last.classList.add(c_FormElementClass_Valid);
+    }
+    else
+    {
+        NameElement_Last.classList.remove(c_FormElementClass_Valid);
+        NameElement_Last.classList.add(c_FormElementClass_Invalid);
+    }
+}
+
+
+function CheckEmailValid()
+{
+    if(IsEmailValid(EmailElement.value))
+    {
+        EmailElement.classList.remove(c_FormElementClass_Invalid);
+        EmailElement.classList.add(c_FormElementClass_Valid);
+    }
+    else
+    {
+        EmailElement.classList.remove(c_FormElementClass_Valid);
+        EmailElement.classList.add(c_FormElementClass_Invalid);
+    }
+}
+
+
+function CheckPasswordValid()
+{
+    // password entry box
+    if(IsPasswordValid(PasswordElement.value))
+    {
+        PasswordElement.classList.remove(c_FormElementClass_Invalid);
+        PasswordElement.classList.add(c_FormElementClass_Valid);
+    }
+    else
+    {
+        PasswordElement.classList.remove(c_FormElementClass_Valid);
+        PasswordElement.classList.add(c_FormElementClass_Invalid);
+    }
+
+    // password syntax popup element:
+
     // validate lowercase
     if(DoesContainLowerCaseLetter(PasswordElement.value))
     {
@@ -84,6 +229,18 @@ function OnPasswordKeyUp(event)
         PasswordSyntaxNumberElement.classList.add(c_FormElementClass_Invalid);
     }
 
+    // validate special character
+    if(DoesContainSpecialCharacter(PasswordElement.value))
+    {
+        PasswordSyntaxSpecialElement.classList.remove(c_FormElementClass_Invalid);
+        PasswordSyntaxSpecialElement.classList.add(c_FormElementClass_Valid);
+    }
+    else
+    {
+        PasswordSyntaxSpecialElement.classList.remove(c_FormElementClass_Valid);
+        PasswordSyntaxSpecialElement.classList.add(c_FormElementClass_Invalid);
+    }
+
     // validate length
     if(IsMinimumLength(PasswordElement.value))
     {
@@ -95,40 +252,6 @@ function OnPasswordKeyUp(event)
         PasswordSyntaxLengthElement.classList.remove(c_FormElementClass_Valid);
         PasswordSyntaxLengthElement.classList.add(c_FormElementClass_Invalid);
     }
-}
-
-// when the user clicks outside of the repeat-password field
-function OnPasswordRepeatBlur(event)
-{
-    CheckPasswordsMatch();
-}
-
-// when the user types in the repeat-password field
-function OnPasswordRepeatKeyUp(event)
-{
-    CheckPasswordsMatch();
-}
-
-
-// called when the submit button is pressed
-function OnSubmitButtonClicked()
-{
-    CheckPasswordsMatch();
-}
-
-
-// called when the form is submitted
-// returns true if the page form should be submitted
-function OnFormSubmitRequested()
-{
-    return DoPasswordFieldsMatch();
-}
-
-
-// when the user clicks outside of the phone-number field
-function OnPhoneNumberBlur(event)
-{
-    CheckValidPhoneNumber();
 }
 
 
@@ -147,7 +270,7 @@ function CheckPasswordsMatch()
 }
 
 
-function CheckValidPhoneNumber()
+function CheckPhoneNumberValid()
 {
     if(IsPhoneNumberValid(PhoneNumberElement.value))
     {
@@ -207,9 +330,30 @@ function DoesContainNumber(string)
 }
 
 
+function DoesContainSpecialCharacter(string)
+{
+    const result = c_SpecialCharacters.split('').some(specialChar => {
+        if (string.includes(specialChar)) {
+          return true;
+        }
+    
+        return false;
+      });
+
+
+    return result;
+}
+
+
 function IsMinimumLength(string)
 {
     return string.length >= c_PasswordMinLength;
+}
+
+
+function IsNotEmpty(string)
+{
+    return string != null && string.trim().length;
 }
 
 
@@ -226,6 +370,21 @@ function IsPhoneNumberValid(string)
 {
     const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
-    
+
+    return re.test(string);
+}
+
+
+function IsNameValid(string)
+{
+    return IsNotEmpty(string);
+}
+
+
+function IsEmailValid(string)
+{
+    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+
     return re.test(string);
 }

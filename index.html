@@ -63,21 +63,20 @@
 
         <div class="horizontal-dividor">
 
-            <div class="cosmetic-container">
+            <div id="cosmetic-container">
 
-                <div class="logo-container">
-                    <img class="logo-img" src="img/duck-duck-games.png">
-                    <div class="logo-text">Duck Duck Games</div>
+                <div id="logo-container">
+                    <img id="logo-img" src="img/duck-duck-games.png">
                 </div>
 
-                <div class="cosmetic-footer">'
+                <div id="cosmetic-footer">'
                     Photo by M Ohlmann
                 </div>
             </div>
 
-            <div class="form-container">
+            <div id="form-container">
 
-                <div class="form-description-text">
+                <div id="form-description-text">
                     <p>
                         This is not a real online service! You know you need
                         something like this in your life.
@@ -90,43 +89,42 @@
                 <form id="signup-form" action="http://httpbin.org/post" method="post">
                     <div class="form-title-text">Let's do this!</div>
 
-                    <div class="form-username">
-                        <label for="name_first">Name</label>
-                        <input type="text" id="name_first" name="name_first" placeholder="First" required>
-                        <input type="text" id="name_last" name="name_last" placeholder="Last" required>
+                    <div id="form-username">
+                        <label for="name-first">Name</label>
+                        <input type="text" id="name-first" name="name-first" placeholder="First" required>
+                        <input type="text" id="name-last" name="name-last" placeholder="Last" required>
                     </div>
 
-                    <div class="form-email">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
-                    </div>
-
-                    <div class="form-phone-number">
+                    <div id="form-phone-number">
                         <label for="phone-number">Phone</label>
                         <input type="text" id="phone-number" name="phone-number" placeholder="(xxx) xxx-xxxx" required>
                     </div>
 
-                    <div class="form-password">
+                    <div id="form-email">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                    </div>
+
+                    <div id="form-password">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="*****" 
-                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and 
-                            one uppercase and lowercase letter, and at least 8 or more characters" required>
-                        <input type="password" id="password-repeat" title="Must match exactly" placeholder="*****" required>
+                        <input type="password" id="password" name="password" placeholder="*****" required>
+                        <input type="password" id="password-repeat" name="password-repeat" title="Must match password exactly" placeholder="*****" required>
                     </div>
 
                     <div id="password-syntax-message">
                         <h3>Password must contain the following:</h3>
                         <p id="password-syntax-letter" class="form-invalid">A <b>lowercase</b> letter</p>
                         <p id="password-syntax-capital" class="form-invalid">A <b>uppercase</b> letter</p>
+                        <p id="password-syntax-special" class="form-invalid">A special (<b></b>) character</p>
                         <p id="password-syntax-number" class="form-invalid">A <b>number</b></p>
                         <p id="password-syntax-length" class="form-invalid">A minimum of <b>8 characters</b></p>
                     </div>
 
-                    <div class="form-submit">
+                    <div id="form-submit">
                         <button type="submit" id="btn-submit">Create Account</button>
                     </div>
 
-                    <div class="form-footer">
+                    <div id="form-footer">
                         Already have an account? <a href="login">Log in</a>
                     </div>
                     
