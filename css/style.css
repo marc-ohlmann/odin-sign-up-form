@@ -91,27 +91,27 @@ body{
     font-family: 'Courier New', Courier, monospace;
 }
 
-.password-valid{
+.form-valid{
     color: green;
 }
 
-.password-valid:before{
+.form-valid:before{
     position: relative;
     left: -35px;
 }
 
-.password-invalid{
+.form-invalid{
     color: red;
 }
 
-#password-repeat.password-invalid{
-    border-color: red;
-    border-width: 4px;
-}
-
-.password-invalid:before{
+.form-invalid:before{
     position: relative;
     left: -35px;
+}
+
+#password-repeat.form-invalid, #phone-number.form-invalid{
+    border-color: red;
+    border-width: 4px;
 }
 
 .form-submit{

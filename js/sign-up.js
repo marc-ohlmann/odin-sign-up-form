@@ -2,10 +2,12 @@
 
 // constants
 const c_PasswordMinLength = 8;
-
+const c_FormElementClass_Valid = "form-valid";
+const c_FormElementClass_Invalid = "form-invalid";
 
 // elements
 const FormElement = document.querySelector("#signup-form");
+const PhoneNumberElement = document.querySelector("#phone-number");
 const PasswordElement = document.querySelector("#password");
 const PasswordRepeatElement = document.querySelector("#password-repeat");
 const PasswordSyntaxElement = document.querySelector("#password-syntax-message");
@@ -23,6 +25,7 @@ PasswordElement.onblur = OnPasswordBlur;
 PasswordElement.onkeyup = OnPasswordKeyUp;
 PasswordRepeatElement.onblur = OnPasswordRepeatBlur;
 PasswordRepeatElement.onkeyup = OnPasswordRepeatKeyUp;
+PhoneNumberElement.onblur = OnPhoneNumberBlur;
 BtnSubmit.onclick = OnSubmitButtonClicked;
 
 
@@ -48,49 +51,49 @@ function OnPasswordKeyUp(event)
     // validate lowercase
     if(DoesContainLowerCaseLetter(PasswordElement.value))
     {
-        PasswordSyntaxLetterElement.classList.remove("password-invalid");
-        PasswordSyntaxLetterElement.classList.add("password-valid");
+        PasswordSyntaxLetterElement.classList.remove(c_FormElementClass_Invalid);
+        PasswordSyntaxLetterElement.classList.add(c_FormElementClass_Valid);
     }
     else
     {
-        PasswordSyntaxLetterElement.classList.remove("password-valid");
-        PasswordSyntaxLetterElement.classList.add("password-invalid");
+        PasswordSyntaxLetterElement.classList.remove(c_FormElementClass_Valid);
+        PasswordSyntaxLetterElement.classList.add(c_FormElementClass_Invalid);
     }
 
     // validate uppercase
     if(DoesContainUpperCaseLetter(PasswordElement.value))
     {
-        PasswordSyntaxCapitalElement.classList.remove("password-invalid");
-        PasswordSyntaxCapitalElement.classList.add("password-valid");
+        PasswordSyntaxCapitalElement.classList.remove(c_FormElementClass_Invalid);
+        PasswordSyntaxCapitalElement.classList.add(c_FormElementClass_Valid);
     }
     else
     {
-        PasswordSyntaxCapitalElement.classList.remove("password-valid");
-        PasswordSyntaxCapitalElement.classList.add("password-invalid");
+        PasswordSyntaxCapitalElement.classList.remove(c_FormElementClass_Valid);
+        PasswordSyntaxCapitalElement.classList.add(c_FormElementClass_Invalid);
     }
 
     // validate numbers
     if(DoesContainNumber(PasswordElement.value))
     {
-        PasswordSyntaxNumberElement.classList.remove("password-invalid");
-        PasswordSyntaxNumberElement.classList.add("password-valid");
+        PasswordSyntaxNumberElement.classList.remove(c_FormElementClass_Invalid);
+        PasswordSyntaxNumberElement.classList.add(c_FormElementClass_Valid);
     }
     else
     {
-        PasswordSyntaxNumberElement.classList.remove("password-valid");
-        PasswordSyntaxNumberElement.classList.add("password-invalid");
+        PasswordSyntaxNumberElement.classList.remove(c_FormElementClass_Valid);
+        PasswordSyntaxNumberElement.classList.add(c_FormElementClass_Invalid);
     }
 
     // validate length
     if(IsMinimumLength(PasswordElement.value))
     {
-        PasswordSyntaxLengthElement.classList.remove("password-invalid");
-        PasswordSyntaxLengthElement.classList.add("password-valid");
+        PasswordSyntaxLengthElement.classList.remove(c_FormElementClass_Invalid);
+        PasswordSyntaxLengthElement.classList.add(c_FormElementClass_Valid);
     }
     else
     {
-        PasswordSyntaxLengthElement.classList.remove("password-valid");
-        PasswordSyntaxLengthElement.classList.add("password-invalid");
+        PasswordSyntaxLengthElement.classList.remove(c_FormElementClass_Valid);
+        PasswordSyntaxLengthElement.classList.add(c_FormElementClass_Invalid);
     }
 }
 
@@ -122,17 +125,39 @@ function OnFormSubmitRequested()
 }
 
 
+// when the user clicks outside of the phone-number field
+function OnPhoneNumberBlur(event)
+{
+    CheckValidPhoneNumber();
+}
+
+
 function CheckPasswordsMatch()
 {
     if(DoPasswordFieldsMatch())
     {
-        PasswordRepeatElement.classList.remove("password-invalid");
-        PasswordRepeatElement.classList.add("password-valid");
+        PasswordRepeatElement.classList.remove(c_FormElementClass_Invalid);
+        PasswordRepeatElement.classList.add(c_FormElementClass_Valid);
     }
     else
     {
-        PasswordRepeatElement.classList.remove("password-valid");
-        PasswordRepeatElement.classList.add("password-invalid");
+        PasswordRepeatElement.classList.remove(c_FormElementClass_Valid);
+        PasswordRepeatElement.classList.add(c_FormElementClass_Invalid);
+    }
+}
+
+
+function CheckValidPhoneNumber()
+{
+    if(IsPhoneNumberValid(PhoneNumberElement.value))
+    {
+        PhoneNumberElement.classList.remove(c_FormElementClass_Invalid);
+        PhoneNumberElement.classList.add(c_FormElementClass_Valid);
+    }
+    else
+    {
+        PhoneNumberElement.classList.remove(c_FormElementClass_Valid);
+        PhoneNumberElement.classList.add(c_FormElementClass_Invalid);
     }
 }
 
@@ -194,4 +219,13 @@ function IsPasswordValid(string)
             DoesContainUpperCaseLetter(string) &&
             DoesContainNumber(string) &&
             IsMinimumLength(string);
+}
+
+
+function IsPhoneNumberValid(string)
+{
+    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+    
+    return re.test(string);
 }
